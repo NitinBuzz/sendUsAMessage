@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GET</title>
+<script type="text/javascript" src="angular.js"></script>
+<link href="bootstrap.css" rel="stylesheet">
+	<style>
+		html body {
+			background-image:url('bg2.jpg');
+			{
+		
+		
+	</style>
+<script type="text/javascript">
+app=angular.module("Application",[])
+app.controller('save',function($http,$scope){
+	$scope.done = function(){
+		var data1 = $scope.name + $scope.message;
+		var data = angular.toJson(data1);
+		$http.post('http://localhost:8081/SendUsAMessage/api/Message/postMessage',data).then(
+				function(string){
+					//alert("+");
+					$scope.message2=string.data;
+				},function(string){
+					//alert("-");
+					//alert(string);
+					$scope.message2=string.data;
+				});
+		
+	}
+	
+});
+
+</script>
+</head>
+<body ng-app="Application">
+<div ng-controller="save">
+<div class = "container-fluid" style = " border: 0px solid #e60000 " >
+<h1 class="text-center" style="color: white;">Leave a message for Nitin</h1>
+<div class = "row" style = "border: 0px solid orange">
+<div class = " col-md-offset-4 col-md-4 col-md-offset-4 
+col-sm-offset-4 col-sm-4 col-sm-offset-4 " 
+style = " background-color:white;  border: 0px solid #ff0080" >
+<form>
+
+    <label>NAME:</label>
+<br>
+      <input type="text" ng-model="name" placeholder="Enter name">
+<br>
+    <label>Message:</label>
+<br>		
+      <input type="text" ng-model="message" placeholder="Enter message">
+
+<br><br>
+
+      <button type="submit" class="btn btn-primary" ng-click="done()">Submit</button>
+
+
+</form>
+<div>{{message2}}</div>
+</div></div>  </div></div>
+</body>
+</html>
