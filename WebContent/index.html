@@ -14,11 +14,25 @@
 		
 		
 	</style>
+	<style>
+	div.content {
+  position: fixed;
+  top: 0; bottom: 0; left: 0; right: 0;
+  width: 540px;
+  height: 400px;
+
+  background-color: rgba(10, 10, 10, 0.5);
+  margin: auto auto;  
+  padding: 40px;
+  
+  @include border-radius(4px);
+  @include box-shadow(0 0 10px rgba(0,0,0,1));
+	</style>
 <script type="text/javascript">
 app=angular.module("Application",[])
 app.controller('save',function($http,$scope){
 	$scope.done = function(){
-		var data1 = $scope.name + $scope.message;
+		var data1 = $scope.name +"-"+ $scope.message;
 		var data = angular.toJson(data1);
 		$http.post('http://localhost:8081/SendUsAMessage/api/Message/postMessage',data).then(
 				function(string){
@@ -39,22 +53,28 @@ app.controller('save',function($http,$scope){
 <body ng-app="Application">
 <div ng-controller="save">
 <div class = "container-fluid" style = " border: 0px solid #e60000 " >
-<h1 class="text-center" style="color: white;">Leave a message for Nitin</h1>
-<div class = "row" style = "border: 0px solid orange">
+
+<div class = "row" style = "  border: 0px solid orange">
 <div class = " col-md-offset-3 col-md-6 col-md-offset-3 
-col-sm-offset-3 col-sm-6 col-sm-offset-3 " style = "border: 0px solid white" >
-<form class="form-horizontal" style = " background-color:transparent;">
+col-sm-offset-3 col-sm-6 col-sm-offset-3 content" 
+style = " border: 0px solid white" >
+<div class = "row " style = "  border: 0px solid orange">
+<form class="form-horizontal ">
 	<div class="form-group">
-    <label class="control-label col-sm-2 col-md-2" style="color: white;">NAME:</label>
+	<h1 class="text-center" style="color: white;">Leave me a message</h1>
+	<br>
+    <label class="control-label col-sm-2 col-md-2" style="color: white;">
+    NAME:</label>
 	<div class="col-sm-10  col-md-10">   
       <input type="text" class="form-control" ng-model="name" placeholder="Enter name">
       </div>
       </div>
 	<div class="form-group">
-    <label class="control-label col-sm-2 col-md-2" style="color: white;">Message:</label>
+    <label class="control-label col-sm-2 col-md-2" style="color: white;">
+    Message:</label>
 		<div class="col-sm-10  col-md-10">
 		<textarea class="form-control" rows="5" 
-		ng-model="message" placeholder="Enter message"></textarea>  
+		ng-model="message" placeholder="Enter message" required="required"></textarea>  
 		</div></div>
 		
 	<div class="form-group">	
@@ -62,8 +82,8 @@ col-sm-offset-3 col-sm-6 col-sm-offset-3 " style = "border: 0px solid white" >
       <button type="submit" class="btn btn-primary" ng-click="done()">Submit</button>
 	</div></div>
 
-</form>
-<div>{{message2}}</div>
+</form></div>
+<div style="color: white; size: 40px; font-style: oblique;">{{message2}}</div>
 </div></div>  </div></div>
 </body>
 </html>
